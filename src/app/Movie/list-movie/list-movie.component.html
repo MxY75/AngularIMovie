@@ -1,0 +1,22 @@
+
+
+<div class="container">
+
+    <div class="row">
+     <div class="col-sm-2"  *ngFor="let item of dataSet | paginate: { itemsPerPage: 30, currentPage: pages }">
+    
+        <br>
+            <a routerLink="/movie/detail/{{item.id}}">
+                <img src ={{item.posterUrl}}  style="height: 270px;"/> 
+                </a> 
+       </div> 
+    </div>
+
+
+    <br>
+   <div class="row">
+      <div class="col-xs-12 col-12">
+        <pagination-controls (pageChange)="pages = $event"></pagination-controls>
+      </div>
+    </div>
+  </div> 

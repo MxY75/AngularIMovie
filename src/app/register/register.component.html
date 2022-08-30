@@ -1,0 +1,49 @@
+<div class="d-flex justify-content-center">
+
+    <form [formGroup]="regiForm"  style="width: 30%;margin-top: 3%;">
+        <!-- Email input -->
+        <h3>Resgister</h3>
+        <hr>
+
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <input  type="text" id="form2Example2" formControlName="firstName" class="form-control" />
+            <label class="form-label" for="form2Example2">First Name</label>
+            <p *ngIf="regiForm.get('firstName')?.errors?.['required']">Please enter a user name</p>
+            <p *ngIf="regiForm.get('firstName')?.errors?.['minlength']?.requiredLength">First name length between 2-18</p>
+            <p *ngIf="regiForm.get('firstName')?.errors?.['maxlength']?.requiredLength">First name length between 2-18</p>
+        </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <input type="text" id="form2Example8" formControlName="lastName" class="form-control" />
+            <label class="form-label" for="form2Example2">Last Name</label>
+            <p *ngIf="regiForm.get('lastName')?.errors?.['required']">Please enter a user name</p>
+            <p *ngIf="regiForm.get('lastName')?.errors?.['minlength']?.requiredLength">First name length between 2-18</p>
+            <p *ngIf="regiForm.get('lastName')?.errors?.['maxlength']?.requiredLength">First name length between 2-18</p>
+        </div>
+       
+
+        <div class="form-outline mb-4 ">
+            <input type="email" id="form2Example1" formControlName ="email" class="form-control" />
+            <label class="form-label" for="form2Example1">Email</label>
+            <p *ngIf="regiForm.get('email')?.errors?.['required']">Please enter email</p>
+            <p *ngIf="regiForm.get('email')?.errors?.['msg']">{{regiForm.get('email')?.errors?.['msg']}}</p>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <input type="password" id="form2Example4"formControlName ="password" class="form-control" />
+            <label class="form-label" for="form2Example2">Password</label>
+            <p *ngIf="regiForm.get('password')?.errors?.['msg']">{{regiForm.get('password')?.errors?.['msg']}}</p>
+        </div>
+        <div class="form-outline mb-4">
+            <input type="password" id="form2Example3"formControlName ="confirmPassword" class="form-control" />
+            <label class="form-label" for="form2Example2">Confirm Password</label>
+        </div>
+ 
+       
+        <!-- Submit button -->
+        <button class="btn btn-primary mb-4" (click)="submitForm()" [disabled]="!regiForm.valid">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/movie/list">IMovie</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Genre
+          </a>
+          <ul class="dropdown-menu">
+            <li *ngFor="let item of genre"><a class="dropdown-item"
+                routerLink="genre/genremovie/{{item.id}}">{{item.name}}</a></li>
+
+          </ul>
+
+        </li>
+      </ul>
+      <ng-container *ngIf="isAdmin;else second">
+        <ul class="d-flex navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+                Admin
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/admin/topMovie/">Top Movies</a></li>
+              <li><a class="dropdown-item" routerLink="/admin/addmovie/">Create Movie</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              {{userInfo.firstname+ " "+userInfo.lastname }}
+            </a>
+            <ul class="dropdown-menu">
+              <!-- <li><a class="dropdown-item" routerLink="/admin/showUsers">User Management</a></li> -->
+              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </li>
+          </ul>
+      </ng-container>
+      <ng-template #second>
+        <div *ngIf="showLogout; else  third">
+          <ul class="d-flex navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{userInfo.firstname+ " "+userInfo.lastname }}
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" routerLink="/user/mymovies/{{userInfo.id}}">Movies</a></li>
+                <li><a class="dropdown-item" routerLink="/user/myfav/{{userInfo.id}}">Favorites</a></li>
+                <li><a class="dropdown-item" href="#">Account</a></li>
+                <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+      </ng-template>
+      <ng-template #third>
+        <!-- beforelogin -->
+        <form class="form-inline mt-2 mt-md-0">
+          <a routerLink="/login"> <button class="btn btn-outline-success my-2 my-sm-0"
+              style="margin-right:5px;">Login</button></a>
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Register</button>
+        </form>
+      </ng-template>
+
+    </div>
+  </div>
+  <!-- </div> -->
+</nav>

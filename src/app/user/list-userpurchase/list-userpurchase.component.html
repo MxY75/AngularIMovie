@@ -1,0 +1,84 @@
+<section class="vh-100" style="background-color: #f4f5f7;">
+    <div class="container py-4 h-10">
+        <div class="row d-flex justify-content-center align-items-center h-100 ">
+            <div class="col col-lg-10 mb-4 mb-lg-0">
+                <div class="card border-dark mb-3" >
+                    <div class="row g-0">
+                        <div class="col-md-4 gradient-custom text-center text-black" >
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                                alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                            <div class="row d-flex justify-content-center">
+                                <div class=" card border-dark col col-lg-10">
+                                    <div class="card-body">
+                                        <h5 class="card-title">User Name</h5>
+                                        
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <a href=""> <li class="list-group-item">Profile Page</li></a>
+                                        <a  routerLink="/user/myfav/{{uid}}"><li class="list-group-item">Favorite</li></a>
+                                        <li class="list-group-item" style="background-color:gray;color: #f4f5f7;">Purchase</li>
+                                        <br>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <hr>
+                            <h3 class="text-center">Your Movies</h3>
+                            <hr>
+                            <div class="row justify-content-center py-4 h-10" *ngFor="let item of movielst | paginate: { itemsPerPage: 10, currentPage: pages }">
+                                <div class="col-md-12 col-xl-10">
+                                    <div class="card shadow-0 border-dark ">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                                                    <div class="bg-image hover-zoom ripple rounded ripple-surface">
+
+                                                        <a routerLink="/movie/detail/{{item.movieId}}">
+                                                        <img src={{item.posterUrl}} class="w-100" />
+                                                        </a>
+                                                        <a href="#!">
+                                                            <div class="hover-overlay">
+                                                                <div class="mask"
+                                                                    style="background-color: rgba(253, 253, 253, 0.15);">
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-10 col-lg-6 col-xl-6">
+                                                    <h5>{{item.title}}</h5>
+                                                    <ul class="list-group  list-group-flush" style="width: 150%;">
+                                                        <li class="list-group-item">Purchase Date <button
+                                                                class="btn btn-secondary btn-sm"
+                                                                style="height:1.5rem ; font-size: x-small;">
+                                                                {{item.purchaseDateTime}}</button></li>
+                                                        <li class="list-group-item">Total Price <button
+                                                                class="btn btn-secondary btn-sm"
+                                                                style="height:1.5rem ; font-size: x-small;">
+                                                                $ {{item.totalPrice}}</button></li>
+                                                        <li class="list-group-item">Purchase Number <button
+                                                                class="btn btn-secondary btn-sm"
+                                                                style="height:1.5rem ; font-size: x-small;">
+                                                                {{item.purchaseNumber}}</button></li>
+
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-12">
+                                  <pagination-controls (pageChange)="pages = $event"></pagination-controls>
+                                </div>
+                              </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

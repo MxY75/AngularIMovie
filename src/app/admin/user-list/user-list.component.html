@@ -1,0 +1,22 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Frist Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Pho No.</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of userCollection">
+          
+            <td>{{item.id}}</td>
+            <td>{{item.firstName}}</td>
+            <td>{{item.lastName}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.phoneNumber}}</td>
+            
+        </tr>
+    </tbody>
+</table>

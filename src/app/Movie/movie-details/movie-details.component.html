@@ -1,0 +1,242 @@
+<div class="container movie-details" style="width: 90%;">
+    <div class="row flex-nowrap">
+        <div class=" col-4 left-box">
+
+
+            <!--Favorite Button-->
+
+            <div *ngIf="isFavorite; else elseBlockId">
+                <h1>{{movieDetail.title}}
+                    <button type="button" class="btn btn-danger" (click)="RemoveLike($event)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-heart" viewBox="0 0 16 16">
+                            <path
+                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z">
+                            </path>
+                        </svg>
+                        Like
+                    </button>
+
+                </h1>
+            </div>
+            <ng-template #elseBlockId>
+                <h1>{{movieDetail.title}}
+                    <button type="button" class="btn btn-outline-danger" (click)="addLike($event)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-heart" viewBox="0 0 16 16">
+                            <path
+                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z">
+                            </path>
+                        </svg>
+                        Like
+                    </button>
+                </h1>
+            </ng-template>
+
+
+            <!--Favorite Button-->
+
+            <p>{{movieDetail.tagline}}
+            <p>
+            <p>{{movieDetail.runtime}}|{{movieDetail.releaseDate.getFullYear()}}</p>
+            <div class="row genre-badge">
+                <div class="col-sm-1" *ngFor="let item of movieDetail.genres">
+                    <p> <span class="badge bg-secondary">{{item.name}}</span></p>
+                </div>
+            </div>
+            <p>{{movieDetail.overview}}</p>
+            <p>Cast: </p>
+            <div class="row casting">
+
+                <div class="col-1" *ngFor="let item of movieDetail.casts">
+                    <a href={{item.tmdbUrl}}><img src={{item.profilePath}} alt=""></a>
+                </div>
+            </div>
+            <br>
+            <div class="d-grid gap-1 col-4" data-bs-toggle="modal" data-bs-target="#reviewmoadl">
+                <button class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path
+                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z">
+                        </path>
+                        <path fill-rule="evenodd"
+                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z">
+                        </path>
+                    </svg>
+                    Review
+                </button>
+
+                <ng-container *ngIf="isPurchaed;else elsetemplate">
+                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal">
+                        PLay</button>
+
+                </ng-container>
+                <ng-template #elsetemplate>
+
+                    <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modelId">
+                        Buy {{movieDetail.price}}</button>
+                </ng-template>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card border-light" style="width:100%; margin-top: 10%;">
+
+                <div class="card-body">
+                    <h5 class="card-title">Movie Facts</h5>
+
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> <i class="bi-calendar"></i>
+
+                        <p>Release Date
+                            <span class="badge bg-secondary">{{movieDetail.releaseDate|date:'yyyy-MM-dd'}}</span>
+                        </p>
+                    </li>
+                    <li class="list-group-item">
+                        <p>Runtime <span class="badge bg-secondary">{{movieDetail.runtime}}m</span></p>
+                    </li>
+                    <li class="list-group-item">
+                        <p>BoxOffice <span class="badge bg-secondary">${{movieDetail.revenue|numberFormat}}</span></p>
+                    </li>
+                    <li class="list-group-item">
+                        <p>Budget <span class="badge bg-secondary">${{movieDetail.budget|numberFormat}}</span></p>
+                    </li>
+                </ul>
+                <div class="card-body">
+                    <h4 class="card-title">Trailer</h4>
+                    
+                        <div class="trailer-list" *ngFor="let item of movieDetail.trailers">
+                            <a href={{item.TrailerUrl}} class="card-link"><button type="button"
+                                    class="btn btn-outline-secondary btn-sm mb-3 w-100">Tralier</button></a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" col-4">
+
+            <img src={{movieDetail.posterUrl}} class="posterimg" alt="">
+
+
+            <div>
+            </div>
+            <!--row-->
+        </div>
+    </div>
+
+    <!-- <div class="row flex-nowrap">
+       
+        <div class="col-md-12">
+            <br>
+            <hr>
+            <h1>{{movieDetail.title}}  Reviews</h1>
+            <hr>
+            <div class="card w-100 border-dark  mb-3 " *ngFor="let item of movieReviews">
+                <div class="card-body">
+                    <ngb-rating [(rate)]="item.rating"></ngb-rating>
+                     {{item.rating}}
+                    <h6 class="card-title">{{getfakeip()}} </h6>
+                    <p class="card-text">{{item.reviewText}}</p>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+    </div> -->
+
+    <div class="row flex-nowrap">
+        <div class="col-md-12">
+            <br>
+            <hr>
+            <h1>{{movieDetail.title}} Reviews</h1>
+            <hr>
+            <div class="card w-100 border-dark  mb-3"
+                *ngFor="let item of movieReviews | paginate: { itemsPerPage: 10, currentPage: pages }">
+                <div class="card-body">
+                    <ngb-rating [(rate)]="item.rating" [readonly]="true" ></ngb-rating>
+                    {{item.rating}}
+                    <h6 class="card-title">{{getfakeip()}} </h6>
+                    <p class="card-text">{{item.reviewText}}</p>
+                </div>
+
+            </div>
+
+
+            <br>
+            <div class="row">
+                <div class="col-xs-12 col-12">
+                    <pagination-controls (pageChange)="pages = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <modal> -->
+
+
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Buy Movie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 text-center">
+
+                            <img src={{movieDetail.posterUrl}} class="buyimg" alt="">
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <p>{{movieDetail.title}}</p>
+                            <hr>
+                            <p>Price <span class="badge bg-secondary">$9.90</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- <button  routerLink="/purchase/buyamovie?uid=xxx&mid=xxx">Purchase</button> -->
+                    <button routerLink="/user/add/{{movieDetail.id}}" data-bs-dismiss="modal">Purchase</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- "#reviewmoadl" -->
+    <!-- Modal -->
+    <div class="modal fade" id="reviewmoadl" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Review</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="" class="form-label"></label>
+
+                        <ngb-rating [(rate)]="starRating">
+                            <ng-template let-fill="fill" let-index="index">
+                                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                            </ng-template>
+                        </ngb-rating>
+                        <hr>
+                        <pre>Rate: <b>{{starRating}}</b></pre>
+                        <textarea class="form-control" name="reviewtext" [(ngModel)]="review" rows="3"
+                            placeholder="please leave your review"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary " (click)="SaveReview($event)">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>

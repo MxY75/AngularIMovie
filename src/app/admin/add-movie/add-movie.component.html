@@ -1,0 +1,69 @@
+<div class="container-sm">
+    <hr>
+   <h1> Adding Movie...</h1>
+    <hr>
+    <form #movieForm="ngForm" (submit)="saveMovie(movieForm)">
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="">Title</label>
+                <input required type="text" [(ngModel)]="movie.title" name="title" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="">Tagline</label>
+                <input required type="text" [(ngModel)]="movie.tagline" name="tagline" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <label for=""> Overview</label>
+        <textarea required="true" name="overview" cols="10" rows="2" [(ngModel)]="movie.overview" class="form-control">
+        </textarea>
+        </div>
+        <br>
+        <div class="mb-3">
+            <label for="">Language</label>
+            <select required name="originalLanguage" [(ngModel)]="movie.originalLanguage">
+                <option *ngFor="let item of lanlst" [value]="item">{{item}}</option>
+            </select>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="">Poster Url</label>
+                <input required type="text" [(ngModel)]="movie.posterUrl" name="posterUrl" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="">Imdb Url</label>
+                <input required type="text" [(ngModel)]="movie.imdbUrl" name="imdbUrl" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="">Tmdb Url</label>
+                <input required type="text" [(ngModel)]="movie.tmdbUrl" name="tmdbUrl" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for=""> Backdrop Url</label>
+                <input required type="text" [(ngModel)]="movie.backdropUrl" name="backdropUrl" class="form-control" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="">Revenue</label>
+                <input required type="text" [(ngModel)]="movie.revenue" name="revenue" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="">Budget</label>
+                <input required type="text" [(ngModel)]="movie.budget" name="budget" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="">Runtime</label>
+                <input required type="text" [(ngModel)]="movie.runtime" name="runtime" class="form-control" />
+            </div>
+        </div>
+       
+        <input type="submit" [disabled]="!movieForm.valid" name="Save movie" class="btn btn-primary" style="margin: 10px">
+        <!-- <input type="button" class="btn btn-secoundary" value="Load data" (click)="loadData(movieForm)"> -->
+        <button type="button" value="Reset" (click)="ResetForm(movieForm)" class="btn btn-warning">Reset</button>
+    </form>
+</div>
